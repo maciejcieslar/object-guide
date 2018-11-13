@@ -1,10 +1,3 @@
-/**
- * @description Sets the given value at the path in the target object.
- * @param {object} target
- * @param {((string | number)[])} path
- * @param {*} value
- * @returns {object}
- */
 function setAtPath(target: object, path: (string | number)[], value: any): any {
   return path.reduce((result, key, index) => {
     if (index === path.length - 1) {
@@ -22,12 +15,6 @@ function setAtPath(target: object, path: (string | number)[], value: any): any {
   }, target)
 }
 
-function getFromPath(target: object, path: (string | number)[]) {
-  return path.reduce((result, key) => {
-    return result[key] || {}
-  }, target)
-}
-
 function flatten(collection: any[]) {
   return collection.reduce((result, current) => {
     let value = current
@@ -40,10 +27,7 @@ function flatten(collection: any[]) {
   }, [])
 }
 
-const getFlattenedValue = (
-  path: (number | string)[] = [],
-  value: any = null,
-) => {
+const getFlattenedValue = (path: (number | string)[] = [], value: any) => {
   if (value === null || typeof value !== 'object') {
     return {
       value,
@@ -78,6 +62,10 @@ function merge(target: object, ...sources: object[]) {
       return flattenObjectKeys([], source)
     }),
   ).reduce((result, { path, value }) => {
+    if (value === undefined) {
+      return result
+    }
+
     return setAtPath(result, path, value)
   }, target)
 }

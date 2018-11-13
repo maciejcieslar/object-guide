@@ -14,7 +14,7 @@ function mergeObject(target: object, source: object) {
 
 function mergeArray(target: any[], source: any[]) {
   source.forEach((value, index) => {
-    target[index] = value
+    target[index] = mergeValues(target[index], value)
   })
 
   return target
@@ -37,11 +37,14 @@ function mergeValues(target: any, source: any) {
 }
 
 const merge = (target: object, ...sources: object[]) => {
-  return sources.reduce((result, source) => {
-    return {
-      ...mergeValues(target, source),
-    }
-  }, target)
+  return sources.reduce(
+    (result, source) => {
+      return {
+        ...mergeValues(target, source),
+      }
+    },
+    { ...target },
+  )
 }
 
 export { merge }

@@ -1,7 +1,7 @@
 import { assignv1, assignv2 } from './assign'
 
-describe('assign v1', () => {
-  it('assigns one object to another', () => {
+describe('assign v1 (copy props)', () => {
+  it('assigns objects properties correctly', () => {
     const obj1 = { one: true }
     const obj2 = { two: true }
 
@@ -26,7 +26,7 @@ describe('assign v1', () => {
   })
 })
 
-describe('assign v2', () => {
+describe('assign v2 (spread operator)', () => {
   it('assigns objects properties correctly', () => {
     const obj1 = { one: true }
     const obj2 = { two: true }

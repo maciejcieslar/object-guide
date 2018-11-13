@@ -1,7 +1,7 @@
 import { deepv1, deepv2 } from './deep'
 
-describe('deep v1', () => {
-  it('copies an object completely (resursively)', () => {
+describe('deep v1 (resursively)', () => {
+  it('copies an object completely', () => {
     const obj1 = { one: true }
 
     expect(deepv1(obj1)).not.toBe(obj1)
@@ -25,8 +25,8 @@ describe('deep v1', () => {
   })
 })
 
-describe('deep v2', () => {
-  it('copies an object completely (JSON.parse/JSON.stringify)', () => {
+describe('deep v2 (JSON.parse/JSON.stringify)', () => {
+  it('copies an object completely', () => {
     const obj1 = { one: true }
 
     expect(deepv2(obj1)).not.toBe(obj1)

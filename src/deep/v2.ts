@@ -1,5 +1,5 @@
-function deep<T extends object>(object: T): T {
-  return JSON.parse(JSON.stringify(object))
+function deep<T extends object>(source: T): T {
+  return JSON.parse(JSON.stringify(source))
 }
 
 export { deep }

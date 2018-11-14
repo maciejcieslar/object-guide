@@ -1,12 +1,13 @@
-function deepObject<T>(target: T) {
-  return Object.keys(target).reduce((result, key) => {
-    const value = target[key]
+function deepObject<T>(source: T) {
+  const result = {}
 
-    return {
-      ...result,
-      [key]: deep(value),
-    }
-  }, {}) as T
+  Object.keys(source).forEach((key) => {
+    const value = source[key]
+
+    result[key] = deep(value)
+  }, {})
+
+  return result as T
 }
 
 function deepArray<T extends any[]>(collection: T) {

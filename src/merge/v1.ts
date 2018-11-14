@@ -2,14 +2,14 @@ const isObject = (val: any) =>
   val !== null && typeof val === 'object' && !Array.isArray(val)
 
 function mergeObject(target: object, source: object) {
-  return Object.keys(source).reduce((result, key) => {
+  Object.keys(source).forEach((key) => {
     const sourceValue = source[key]
     const targetValue = target[key]
 
-    result[key] = mergeValues(targetValue, sourceValue)
+    target[key] = mergeValues(targetValue, sourceValue)
+  })
 
-    return result
-  }, target)
+  return target
 }
 
 function mergeArray(target: any[], source: any[]) {
@@ -37,14 +37,11 @@ function mergeValues(target: any, source: any) {
 }
 
 const merge = (target: object, ...sources: object[]) => {
-  return sources.reduce(
-    (result, source) => {
-      return {
-        ...mergeValues(target, source),
-      }
-    },
-    { ...target },
-  )
+  sources.forEach((source) => {
+    return mergeValues(target, source)
+  })
+
+  return target
 }
 
 export { merge }

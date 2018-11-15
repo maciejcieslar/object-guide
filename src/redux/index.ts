@@ -18,8 +18,8 @@ const combineReducers = (reducersMap: object) => {
 
 const createStore = (reducer, initialState: any = {}) => {
   let state = {
-    ...copy(initialState),
     ...reducer(undefined, {}),
+    ...copy(initialState),
   }
   let subscribers = []
 

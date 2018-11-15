@@ -34,6 +34,8 @@ describe('Redux', () => {
       expect(prevState.user).toEqual({ firstName: '', lastName: '' })
     })
 
+    const prevState = store.getState()
+
     store.dispatch({
       type: 'UPDATE_USER',
       payload: {
@@ -44,6 +46,9 @@ describe('Redux', () => {
       },
     })
 
+    const state = store.getState()
+
     expect(store.getState()).not.toBe(store.getState())
+    expect(prevState).not.toBe(state)
   })
 })

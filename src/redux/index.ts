@@ -18,8 +18,8 @@ const combineReducers = (reducersMap: object) => {
 
 const createStore = (reducer, initialState: any = {}) => {
   let state = {
-    ...copy(initialState),
     ...reducer(undefined, {}),
+    ...copy(initialState),
   }
   let subscribers = []
 
@@ -34,7 +34,7 @@ const createStore = (reducer, initialState: any = {}) => {
       const prevState = state
       state = reducer(state, action)
 
-      subscribers.forEach((sub) => sub(state, prevState))
+      subscribers.forEach((sub) => sub(copy(state), copy(prevState)))
 
       return action
     },

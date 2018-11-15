@@ -1,10 +1,10 @@
-const assign = (target: object, ...sources: object[]) => {
+const assign = (...sources: object[]) => {
   return sources.reduce((result, current) => {
     return {
       ...result,
       ...current,
     }
-  }, target)
+  }, {})
 }
 
 export { assign }

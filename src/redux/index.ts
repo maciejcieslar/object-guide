@@ -34,7 +34,7 @@ const createStore = (reducer, initialState: any = {}) => {
       const prevState = state
       state = reducer(state, action)
 
-      subscribers.forEach((sub) => sub(state, prevState))
+      subscribers.forEach((sub) => sub(copy(state), copy(prevState)))
 
       return action
     },

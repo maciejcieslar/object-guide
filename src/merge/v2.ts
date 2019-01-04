@@ -27,7 +27,7 @@ function flatten(collection: any[]) {
   }, [])
 }
 
-const getFlattenedValue = (path: (number | string)[] = [], value: any) => {
+function getValue(value: any, path: (number | string)[] = []) {
   if (value === null || typeof value !== 'object') {
     return {
       value,
@@ -36,30 +36,30 @@ const getFlattenedValue = (path: (number | string)[] = [], value: any) => {
   }
 
   if (Array.isArray(value)) {
-    return flattenArrayKeys(path, value)
+    return getArrayValues(value, path)
   }
 
-  return flattenObjectKeys(path, value)
+  return getObjectValues(value, path)
 }
 
-function flattenArrayKeys(path: (number | string)[], collection: any[]) {
+function getArrayValues(collection: any[], path: (number | string)[] = []) {
   return collection.map((value, index) => {
-    return getFlattenedValue([...path, index], value)
+    return getValue(value, [...path, index])
   })
 }
 
-function flattenObjectKeys(path: (number | string)[], source: object) {
+function getObjectValues(source: object, path: (number | string)[] = []) {
   return Object.keys(source).map((key) => {
     const value = source[key]
 
-    return getFlattenedValue([...path, key], value)
+    return getValue(value, [...path, key])
   })
 }
 
 function merge(target: object, ...sources: object[]) {
   return flatten(
     sources.map((source) => {
-      return flattenObjectKeys([], source)
+      return getValue(source)
     }),
   ).reduce((result, { path, value }) => {
     if (value === undefined) {

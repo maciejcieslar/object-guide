@@ -13,7 +13,7 @@ function deepObject<T>(source: T) {
 function deepArray<T extends any[]>(collection: T) {
   return collection.map((value) => {
     return deep(value)
-  }) as T
+  })
 }
 
 function deep<T>(value: T): T {
